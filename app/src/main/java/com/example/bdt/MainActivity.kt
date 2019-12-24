@@ -1,10 +1,11 @@
 package com.example.bdt
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -15,10 +16,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = BDAdapter(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+//        val db = Room.databaseBuilder(
+//            applicationContext,
+//            BDDatabase::class.java, "birthday_database"
+//        ).build()
+        val testing = BDDatabase.getInstance(application)
+        //   testing.insertDB( BD(1,"asd","asd"))
+
+
+        fab.setOnClickListener {
+            //val application = requireNotNull(this).application
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
